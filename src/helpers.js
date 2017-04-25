@@ -34,6 +34,16 @@ function mergeHash(source, target, old, keepRemoved) {
     target = target || {};
     old    = old || {};
 
+    Object.keys(target).forEach(function (key) {
+        // automatically generate plural key when [count] variable is found
+        pluralMatch = /_plural(_\d+)?$/.test( key );
+        if ( /\[count\]/.test( key ) && !pluralMatch ) {
+          if ( !target[ key + '_plural' ] ) {
+            target[ key + '_plural' ] = target[ key ];
+          }
+        }
+    });
+
     Object.keys(source).forEach(function (key) {
         if ( target[key] !== undefined ) {
             if (typeof source[key] === 'object' && source[key].constructor !== Array) {
