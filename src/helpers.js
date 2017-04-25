@@ -79,8 +79,13 @@ function mergeHash(source, target, old, keepRemoved) {
         }
     });
 
+    sortedTarget = {}
+    Object.keys( target ).sort().map( function( key ) {
+      sortedTarget[ key ] = target[ key ]
+    })
+
     return {
-        'new': target,
+        'new': sortedTarget,
         'old': old
     };
 }
