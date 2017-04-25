@@ -31,8 +31,8 @@ function hashFromString(path, separator, hash) {
 // hash has the corresponding key (or if keepRemoved is true).
 // If not, the value is added to an `old` hash.
 function mergeHash(source, target, old, keepRemoved) {
-    target = target || {};
-    old    = old || {};
+    target = Object.assign( {}, target )
+    old    = Object.assign( {}, old )
 
     Object.keys(target).forEach(function (key) {
         // automatically generate plural key when [count] variable is found
